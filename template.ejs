@@ -1,0 +1,17 @@
+import React from 'react';
+import {shallow} from 'enzyme';
+import <%= componentName %> from './index';
+<% var useDefaultProps = Object.keys(defaultProps).length > 0; if (useDefaultProps) { %>
+const defaultProps = { <% Object.values(defaultProps).forEach(function(defaultProp) {%>
+        <%- defaultProp + ',' %><% }); %>
+};<% } %>
+
+describe('<%= componentName %>', () => {
+    it('should render without errors', () => {
+        shallow(<<%= componentName %><% if (useDefaultProps) {%> {...defaultProps}<%}%> />);
+    });
+
+    it('should match snapshot', () => {
+        expect(shallow(<<%= componentName %><% if (useDefaultProps) {%> {...defaultProps}<%}%> />)).toMatchSnapshot();
+    });
+});
